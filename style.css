@@ -1,0 +1,48 @@
+/* Making the Montserrat font available to use of this CSS Document.*/
+@font-face {
+    font-family: Montserrat;
+    src: url(./fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+/* Changing the color of the scrollbar.*/
+::-webkit-scrollbar {
+    background-color: #dbeeff;
+}
+
+/* Changing the color of the background and the text along with making use of flexbox.*/
+body {
+    background-color: #c1e2ff;
+    height: 100vh;
+    display: flex;
+    color: #88c3f3
+}
+ 
+/* Changing the background color to make it look like a card*/
+.container {
+    font-family: Montserrat;
+    font-weight: bold;
+    background-color: #dbeeff;
+    border-radius: 20px;
+    height: 45%;
+    max-width: 750px;
+    margin: auto;
+    box-shadow: 0px 3px 10px #00000033; 
+    padding: 10px;
+    transition: 0.8s;
+}
+
+/* Adding shadow to the text.*/
+.container h3, p {
+    text-shadow: 0px 3px 10px #8b8b8b33;
+}
+
+/* Changing the size of the font and aligning the text to the center.*/
+.container h3 {
+    font-size: 30px;
+    text-align: center;
+}
+
+/* Making it so when the user hover over the container, it gets slightly bigger.*/
+.container:hover {
+    scale: 1.12;
+}
