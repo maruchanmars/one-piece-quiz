@@ -73,9 +73,76 @@ const quizQuestions = [
 ];
 
 // The default current question index is 0.
-let currentQuestion = 0;
+let currentQuestionIndex = 0;
 
 // The score at the beginning of the game is 0.
 let score = 0;
+
+function displayQuestions() {
+    // Selecting the quiz class from quiz.html page.
+    const quizClass = document.getElementById("quiz");
+
+    // Making an element that will be the submit button.
+    const buttonElement = document.createElement('button');
+
+    // The text content of the submit button will just say submit. 
+    buttonElement.textContent = "Submit";
+    
+    // Defining the class name of the submit button.
+    buttonElement.className = "submit-button";
+
+    // Checking if the quiz element exists.
+    if (quizClass) {
+        // For each of the quiz questions, get the text content and display it on the webpage.
+        quizClass.innerHTML = "";
+
+        const q = quizQuestions[currentQuestionIndex];
+
+        // Creating an element for the questions.
+        const questionElement = document.createElement("h3");
+
+        // The text content is the index and the question formatted.
+        questionElement.textContent = q.question;
+
+        // Create a container for all the choices
+        const choicesContainer = document.createElement("div");
+        
+        // Create each choice as a separate element on its own line.
+        q.choices.forEach((choice, index) => {
+            // Creating an element for the choices.
+            const choiceElement = document.createElement("button");
+
+            // The text content of each choice with the corresponding letter. 
+            choiceElement.textContent = `${choice}`;
+
+            // Styling the margin. 
+            choiceElement.style.margin = "10px 0";
+
+            // Adding the element to the container. 
+            choicesContainer.appendChild(choiceElement);
+
+            choicesContainer.className = "choice-buttons";
+        });
+
+        // Changing the font-size of the questions.
+        questionElement.style.fontSize = "25px";
+
+        choicesContainer.style.fontSize = "25px"
+
+        // Adding the text content onto the document dynamically.
+        quizClass.appendChild(questionElement);
+
+        // Adding the choices onto the container. 
+        quizClass.appendChild(choicesContainer);
+            
+        // Adding the button onto the HTML document. 
+        quizClass.appendChild(buttonElement);
+
+        // Styling it so the questions are aligned to the left. 
+        questionElement.style.textAlign = "left";
+    } // End of if statement.
+} // End of displayQuestion() function.
+
+
 
 
