@@ -209,50 +209,78 @@ function displayQuestions() {
 
 // Function to show the final score using SweetAlert2.
 function showFinalScore() {
+    // Calculating the percentage that is rounded.
     const percentage = Math.round((score / quizQuestions.length) * 100);
-    let title, icon, message;
 
+    // Defining variables that will be used in the conditional statements.
+    let title; // Title
+    let icon; // Icon
+    let message; // Message
+
+    // The user got more than an 80%, they are considered an expert.
     if (percentage >= 80) {
         title = 'Excellent! 🏴‍☠️';
         icon = 'success';
+
+        // Letting the user know their score out of the amount of questions in the game (10) and their percentage.
         message = `You're a true One Piece expert! You scored ${score}/${quizQuestions.length} (${percentage}%). You're ready to sail the Grand Line!`;
+
+    // The user got more than an 60%, they are considered someone who knows the basics.
     } else if (percentage >= 60) {
         title = 'Good Job! ⚓';
         icon = 'success';
+
+        // Letting the user know their score out of the amount of questions in the game (10) and their percentage.
         message = `Not bad! You scored ${score}/${quizQuestions.length} (${percentage}%). You know your One Piece basics!`;
+
+    // The user got less than a 50%, they should keep learning about one piece (or learn to read the article..)
     } else {
         title = 'Keep Learning! 🌊';
         icon = 'info';
-        message = `You scored ${score}/${quizQuestions.length} (${percentage}%). Time to rewatch some One Piece episodes!`;
-    }
 
+        // Letting the user know their score out of the amount of questions in the game (10) and their percentage.
+        message = `You scored ${score}/${quizQuestions.length} (${percentage}%). Time to rewatch some One Piece episodes!`;
+    } // End of if-then-else statement.
+
+    // Formatting the end screen of the quiz/game.
     Swal.fire({
         title: title,
         text: message,
         icon: icon,
+
+        // Giving the user the option to restart the game.
         confirmButtonText: 'Restart Quiz',
+
+        // Giving the user the option to go back to the home page.
         cancelButtonText: 'Back to Home',
         showCancelButton: true,
         confirmButtonColor: '#88c3f3',
         cancelButtonColor: '#6ba8e0',
         background: '#dbeeff',
         color: '#88c3f3',
+
+        // Creating a custom class for the styling.
         customClass: {
             popup: 'montserrat-popup',
             title: 'montserrat-title',
             content: 'montserrat-content',
             confirmButton: 'montserrat-button',
             cancelButton: 'montserrat-button'
-        }
+        } // End of custom class. 
+    
     }).then((result) => {
+        // If the user decides to restart the quiz, the score and current question will be set back to 0.
         if (result.isConfirmed) {
-            // Restart the quiz
-            currentQuestionIndex = 0;
-            score = 0;
+            // Restarting the quiz.
+            currentQuestionIndex = 0; // Resetting the current question index. 
+            score = 0; // Resetting the score.
+            
+            // Displaying the questions again.
             displayQuestions();
+
         } else {
-            // Go back to home page
+            // Going back to home page
             window.location.href = 'index.html';
-        }
+        } // End of if-else statement. 
     });
-}
+} // End of showFinalScore() function.
