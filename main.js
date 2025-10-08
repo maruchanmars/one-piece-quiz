@@ -116,6 +116,14 @@ function displayQuestions() {
                     // Increase the user's score. 
                     score++;
 
+                    // When the user gets the answer correct, the confetti will go off.
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#88c3f3', '#dbeeff', '#c1e2ff', '#6ba8e0']
+                    });
+
                     // Make a custom popup using the Sweet Alert 2 library that helps with making custom popups.
                     Swal.fire({ // The popup if the user gets the answer correct. 
                         title: 'Correct! 🎉',
@@ -230,6 +238,36 @@ function showFinalScore() {
         title = 'Excellent! 🏴‍☠️';
         icon = 'success';
 
+        // When the user has good performance, the confetti will go off.
+        confetti({
+            particleCount: 200,
+            spread: 100,
+            origin: { y: 0.6 },
+            colors: ['#88c3f3', '#dbeeff', '#c1e2ff', '#6ba8e0', '#FFD700', '#FFA500']
+        });
+
+        // Additional confetti bursts due to their good performance (setting the time too with help of chatgpt and google.)
+        setTimeout(() => {
+            confetti({
+                particleCount: 150,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: ['#88c3f3', '#dbeeff', '#c1e2ff', '#6ba8e0']
+            });
+        }, 300);
+
+        // Additional confetti bursts due to their good performance (setting the time too with help of chatgpt and google.)
+        setTimeout(() => {
+            confetti({
+                particleCount: 150,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: ['#88c3f3', '#dbeeff', '#c1e2ff', '#6ba8e0']
+            });
+        }, 600);
+
         // Letting the user know their score out of the amount of questions in the game (10) and their percentage.
         message = `You're a true One Piece expert! You scored ${score}/${quizQuestions.length} (${percentage}%). You're ready to sail the Grand Line!`;
 
@@ -237,6 +275,14 @@ function showFinalScore() {
     } else if (percentage >= 60) {
         title = 'Good Job! ⚓';
         icon = 'success';
+
+        // Trigger moderate confetti for good performance
+        confetti({
+            particleCount: 75,
+            spread: 50,
+            origin: { y: 0.7 },
+            colors: ['#88c3f3', '#dbeeff', '#c1e2ff']
+        });
 
         // Letting the user know their score out of the amount of questions in the game (10) and their percentage.
         message = `Not bad! You scored ${score}/${quizQuestions.length} (${percentage}%). You know your One Piece basics!`;
