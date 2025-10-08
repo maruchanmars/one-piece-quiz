@@ -82,15 +82,6 @@ function displayQuestions() {
     // Selecting the quiz class from quiz.html page.
     const quizClass = document.getElementById("quiz");
 
-    // Making an element that will be the submit button.
-    const buttonElement = document.createElement('button');
-
-    // The text content of the submit button will just say submit. 
-    buttonElement.textContent = "Submit";
-    
-    // Defining the class name of the submit button.
-    buttonElement.className = "submit-button";
-
     // Checking if the quiz element exists.
     if (quizClass) {
         // For each of the quiz questions, get the text content and display it on the webpage.
@@ -108,7 +99,7 @@ function displayQuestions() {
         const choicesContainer = document.createElement("div");
         
         // Create each choice as a separate element on its own line.
-        q.choices.forEach((choice, index) => {
+        q.choices.forEach((choice) => {
             // Creating an element for the choices.
             const choiceElement = document.createElement("button");
 
@@ -118,9 +109,85 @@ function displayQuestions() {
             // Styling the margin. 
             choiceElement.style.margin = "10px 0";
 
+            // Adding click event to each choice button
+            choiceElement.onclick = () => {
+                // If the choice that the user made is equal to the answer.
+                if (choice === q.answer) {
+                    // Increase the user's score. 
+                    score++;
+
+                    // Make a custom popup using the Sweet Alert 2 library that helps with making custom popups.
+                    Swal.fire({ // The popup if the user gets the answer correct. 
+                        title: 'Correct! 🎉',
+                        text: 'Great job! You got it right!',
+                        icon: 'success',
+                        confirmButtonText: 'Next Question',
+                        confirmButtonColor: '#88c3f3',
+                        background: '#dbeeff',
+                        color: '#88c3f3',
+
+                        // Creating a custom class for the styling.
+                        customClass: {
+                            popup: 'montserrat-popup',
+                            title: 'montserrat-title',
+                            content: 'montserrat-content',
+                            confirmButton: 'montserrat-button'
+                        } // End of the custom class.
+
+                    }).then(() => {
+                        // Increasing the question index so it moves onto the next question.
+                        currentQuestionIndex++;
+
+                        // If the current question index is less than the array length, display a new question.
+                        if (currentQuestionIndex < quizQuestions.length) {
+                            // Calling the function that displays the question. 
+                            displayQuestions();
+                        } else {
+                            // If the game is over, show the final score. 
+                            showFinalScore();
+                        } // End of if-else statement. 
+                    });
+
+                } else {
+                    Swal.fire({
+                        // Making the popup that will display if the answer is incorrect, it was made using the Sweet Alerts 2 library.
+                        title: 'Incorrect! ❌',
+                        text: `The correct answer is: ${q.answer}`,
+                        icon: 'error',
+                        confirmButtonText: 'Next Question',
+                        confirmButtonColor: '#88c3f3',
+                        background: '#dbeeff',
+                        color: '#88c3f3',
+
+                        // Creating a custom class for the styling.
+                        customClass: {
+                            popup: 'montserrat-popup',
+                            title: 'montserrat-title',
+                            content: 'montserrat-content',
+                            confirmButton: 'montserrat-button'
+                        } // End of the custom class.
+
+                    }).then(() => {
+                        // Increasing the question index so it moves onto the next question.
+                        currentQuestionIndex++;
+
+                        // If the current question index is less than the array length, display a new question.
+                        if (currentQuestionIndex < quizQuestions.length) {
+                            // Calling the function that displays the question. 
+                            displayQuestions();
+
+                        } else {
+                            // If the game is over, show the final score. 
+                            showFinalScore();
+                        } // End of if-else statement. 
+                    });
+                } // End of if-else statement. 
+            };
+
             // Adding the element to the container. 
             choicesContainer.appendChild(choiceElement);
 
+            // Defining a class name for the choice container. 
             choicesContainer.className = "choice-buttons";
         });
 
@@ -134,15 +201,58 @@ function displayQuestions() {
 
         // Adding the choices onto the container. 
         quizClass.appendChild(choicesContainer);
-            
-        // Adding the button onto the HTML document. 
-        quizClass.appendChild(buttonElement);
 
         // Styling it so the questions are aligned to the left. 
         questionElement.style.textAlign = "left";
     } // End of if statement.
 } // End of displayQuestion() function.
 
+// Function to show the final score using SweetAlert2.
+function showFinalScore() {
+    const percentage = Math.round((score / quizQuestions.length) * 100);
+    let title, icon, message;
 
+    if (percentage >= 80) {
+        title = 'Excellent! 🏴‍☠️';
+        icon = 'success';
+        message = `You're a true One Piece expert! You scored ${score}/${quizQuestions.length} (${percentage}%). You're ready to sail the Grand Line!`;
+    } else if (percentage >= 60) {
+        title = 'Good Job! ⚓';
+        icon = 'success';
+        message = `Not bad! You scored ${score}/${quizQuestions.length} (${percentage}%). You know your One Piece basics!`;
+    } else {
+        title = 'Keep Learning! 🌊';
+        icon = 'info';
+        message = `You scored ${score}/${quizQuestions.length} (${percentage}%). Time to rewatch some One Piece episodes!`;
+    }
 
-
+    Swal.fire({
+        title: title,
+        text: message,
+        icon: icon,
+        confirmButtonText: 'Restart Quiz',
+        cancelButtonText: 'Back to Home',
+        showCancelButton: true,
+        confirmButtonColor: '#88c3f3',
+        cancelButtonColor: '#6ba8e0',
+        background: '#dbeeff',
+        color: '#88c3f3',
+        customClass: {
+            popup: 'montserrat-popup',
+            title: 'montserrat-title',
+            content: 'montserrat-content',
+            confirmButton: 'montserrat-button',
+            cancelButton: 'montserrat-button'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Restart the quiz
+            currentQuestionIndex = 0;
+            score = 0;
+            displayQuestions();
+        } else {
+            // Go back to home page
+            window.location.href = 'index.html';
+        }
+    });
+}

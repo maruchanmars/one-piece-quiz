@@ -73,27 +73,6 @@ body {
     line-height: 0.4;
 }
 
-.submit-button {
-    font-family: Montserrat;
-    font-weight: bold;
-    font-size: 25px;
-    background-color: #88c3f3;
-    color: #FFFF;
-    border-color: #88c3f3;
-    border-style: none;
-    border-radius: 15px;
-    margin: 20px auto;
-    display: block;
-    padding: 15px 30px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.submit-button:hover {
-    background-color: #6ba8e0;
-    transform: scale(1.05);
-}
-
 .choice-buttons button {
     font-family: Montserrat;
     font-weight: bold;
@@ -115,4 +94,24 @@ body {
 .choice-buttons button:hover {
     background-color: #6ba8e0;
     transform: scale(1.02);
+}
+
+/* SweetAlert2 custom classes to apply Montserrat font */
+.montserrat-popup {
+    font-family: Montserrat;
+}
+
+.montserrat-title {
+    font-family: Montserrat;
+    font-weight: bold;
+}
+
+.montserrat-content {
+    font-family: Montserrat;
+    font-weight: bold;
+}
+
+.montserrat-button {
+    font-family: Montserrat;
+    font-weight: bold;
 }
