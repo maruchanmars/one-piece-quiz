@@ -126,6 +126,10 @@ function displayQuestions() {
                         background: '#dbeeff',
                         color: '#88c3f3',
 
+                        // Fixed the issue of page scrolling up when the popup shows up.
+                        scrollbarPadding: false,
+                        heightAuto: false,
+
                         // Creating a custom class for the styling.
                         customClass: {
                             popup: 'montserrat-popup',
@@ -158,6 +162,10 @@ function displayQuestions() {
                         confirmButtonColor: '#88c3f3',
                         background: '#dbeeff',
                         color: '#88c3f3',
+
+                        // Fixed the issue of page scrolling up when the popup shows up.
+                        scrollbarPadding: false,
+                        heightAuto: false,
 
                         // Creating a custom class for the styling.
                         customClass: {
@@ -258,6 +266,10 @@ function showFinalScore() {
         cancelButtonColor: '#6ba8e0',
         background: '#dbeeff',
         color: '#88c3f3',
+
+        // Fixed the issue of page scrolling up when the popup shows up.
+        scrollbarPadding: false,
+        heightAuto: false,
 
         // Creating a custom class for the styling.
         customClass: {
