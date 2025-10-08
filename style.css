@@ -30,11 +30,6 @@ body {
     transition: 0.8s;
 }
 
-/* Adding shadow to the text.*/
-.container h3, p {
-    text-shadow: 0px 3px 10px #8b8b8b33;
-}
-
 /* Changing the size of the font and aligning the text to the center.*/
 .container h3, h1 {
     font-size: 30px;
